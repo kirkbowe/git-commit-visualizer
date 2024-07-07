@@ -2,6 +2,7 @@
 
 Git Commit Visualizer is a web application built with Flask and D3.js that visualizes commit history from a Git repository.
 
+![](https://www.kirkbowe.com/visualizer.gif)
 
 ## Features
 
