@@ -53,7 +53,15 @@ def filter_commits_by_date_range(commits, start_date, end_date):
     """
     start_date = datetime.datetime.fromisoformat(start_date)
     end_date = datetime.datetime.fromisoformat(end_date)
-    return [commit for commit in commits if start_date <= datetime.datetime.fromisoformat(commit['date']) <= end_date]
+    
+    def parse_commit_date(date_str):
+        # Ensure the commit date is parsed correctly and converted to a naive datetime object
+        commit_date = datetime.datetime.fromisoformat(date_str)
+        if commit_date.tzinfo is not None:
+            commit_date = commit_date.replace(tzinfo=None)
+        return commit_date
+
+    return [commit for commit in commits if start_date <= parse_commit_date(commit['date']) <= end_date]
 
 # Example usage within the Flask server
 if __name__ == "__main__":
@@ -66,3 +74,4 @@ if __name__ == "__main__":
     date_filtered_commits = filter_commits_by_date_range(commits, '2023-01-01T00:00:00', '2023-12-31T23:59:59')
     print(author_filtered_commits)
     print(date_filtered_commits)
+

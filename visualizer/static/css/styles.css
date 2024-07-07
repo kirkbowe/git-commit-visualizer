@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+#commit-graph {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -1,8 +1,11 @@
-from flask import Flask, jsonify, request
-import git
-from visualizer import get_repo_commits, filter_commits_by_author, filter_commits_by_date_range
+from flask import Flask, render_template, jsonify, request
+from .visualizer import get_repo_commits, filter_commits_by_author, filter_commits_by_date_range
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='static/templates')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/api/commits')
 def get_commits():
@@ -23,8 +26,10 @@ def get_commits():
 
 def start(repo_path):
     app.config['REPO_PATH'] = repo_path
+    app.config['EXPLAIN_TEMPLATE_LOADING'] = True
     app.run(debug=True)
 
 if __name__ == "__main__":
     start('/Users/kirkbowe/Projects/Python/git-commit-visualizer')
+
 

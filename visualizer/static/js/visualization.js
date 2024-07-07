@@ -1,7 +1,8 @@
 // Fetch commit data and render the visualization
+console.log("Loading visualization.js");
 d3.json('/api/commits', function(error, data) {
     if (error) throw error;
-    
+    console.log(data);
     var svg = d3.select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
