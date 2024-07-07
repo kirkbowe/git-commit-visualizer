@@ -20,7 +20,7 @@ Git Commit Visualizer is a web application built with Flask and D3.js that visua
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/git-commit-visualizer.git
+git clone https://github.com/kirkbowe/git-commit-visualizer.git
 cd git-commit-visualizer
 ```
 
