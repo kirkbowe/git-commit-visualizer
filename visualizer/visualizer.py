@@ -1,3 +1,4 @@
+import argparse
 import git
 import datetime
 
@@ -65,7 +66,11 @@ def filter_commits_by_date_range(commits, start_date, end_date):
 
 # Example usage within the Flask server
 if __name__ == "__main__":
-    repo_path = '/Users/kirkbowe/Projects/Python/git-commit-visualizer'
+    parser = argparse.ArgumentParser(description='Git Commit Visualizer')
+    parser.add_argument('repo_path', type=str, help='Path to the Git repository')
+    args = parser.parse_args()
+
+    repo_path = args.repo_path
     commits = get_repo_commits(repo_path)
     print(commits)
 

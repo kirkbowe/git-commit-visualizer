@@ -1,3 +1,5 @@
+import argparse
+import sys
 from flask import Flask, render_template, jsonify, request
 from .visualizer import get_repo_commits, filter_commits_by_author, filter_commits_by_date_range
 
@@ -30,6 +32,14 @@ def start(repo_path):
     app.run(debug=True)
 
 if __name__ == "__main__":
-    start('/Users/kirkbowe/Projects/Python/git-commit-visualizer')
+    parser = argparse.ArgumentParser(description='Git Commit Visualizer')
+    parser.add_argument('repo_path', type=str, help='Path to the Git repository')
+    args = parser.parse_args()
+    
+    if not args.repo_path:
+        print("Error: Please provide the path to the Git repository.")
+        sys.exit(1)
+        
+    start(args.repo_path)
 
 
