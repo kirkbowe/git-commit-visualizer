@@ -6,7 +6,7 @@ Git Commit Visualizer is a web application built with Flask and D3.js that visua
 ## Features
 
 - Visualization of Commit History: Display commit messages and details in an interactive graph.
-- Filtering: Filter commits by author and date range.
+- Filtering: Filter commits by author.
 - Dynamic Update: Automatically updates visualization when filters are applied.
 
 
