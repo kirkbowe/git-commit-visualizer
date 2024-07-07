@@ -1,8 +1,6 @@
 // Fetch commit data and render the visualization
-console.log("Loading visualization.js");
-d3.json('/api/commits', function(error, data) {
-    if (error) throw error;
-    console.log(data);
+window.onload = function() {
+d3.json('/api/commits').then(function(data) {
     var svg = d3.select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height");
@@ -43,13 +41,16 @@ d3.json('/api/commits', function(error, data) {
             .on("start", dragstarted)
             .on("drag", dragged)
             .on("end", dragended))
-        .on("mouseover", function(d) {
+        .on("mouseover", function(event, d) {
+            var eventX = event.pageX;
+            var eventY = event.pageY;
+
             tooltip.transition()
                 .duration(200)
                 .style("opacity", .9);
-            tooltip.html("Commit: " + d.id + "<br/>" + d.label)
-                .style("left", (d3.event.pageX + 5) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
+            tooltip.html("Commit: " + d.label + "<br/>" + d.id)
+                .style("left", (eventX + 5) + "px")
+                .style("top", (eventY - 28) + "px");
         })
         .on("mouseout", function(d) {
             tooltip.transition()
@@ -89,20 +90,23 @@ d3.json('/api/commits', function(error, data) {
             .attr("y", function(d) { return d.y; });
     }
 
-    function dragstarted(d) {
-        if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
     }
 
-    function dragged(d) {
-        d.fx = d3.event.x;
-        d.fy = d3.event.y;
+    function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
     }
 
-    function dragended(d) {
-        if (!d3.event.active) simulation.alphaTarget(0);
+    function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
     }
-});
+}).catch(function(error) {
+    console.error('Error fetching commit data:', error);
+  });
+};

@@ -11,3 +11,37 @@ h1 {
     justify-content: center;
     margin-top: 20px;
 }
+
+/* Styles for the links (edges) */
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+  }
+  
+  /* Styles for the nodes (commits) */
+  .nodes circle {
+    stroke: #fff;
+    stroke-width: 2px;
+  }
+  
+  /* Styles for the commit labels */
+  .commit-label {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    fill: #333;
+  }
+
+  .commit-node
+  { fill: #69b3a2; cursor: pointer; }
+  
+  /* Styles for the tooltip */
+  #tooltip {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    pointer-events: none;
+  }
+  
